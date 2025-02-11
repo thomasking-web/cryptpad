@@ -7,6 +7,7 @@ var Http = require('http');
 var Fs = require('fs');
 var nThen = require("nthen");
 var Util = require("./lib/common-util");
+const Cors = require('cors');
 
 var OS = require("node:os");
 var Cluster = require("node:cluster");
@@ -17,6 +18,21 @@ var Env = Environment.create(config);
 var Default = require("./lib/defaults");
 
 var app = Express();
+
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (Env.httpUnsafeOrigin === '*' || !origin || origin === Env.httpUnsafeOrigin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204
+};
+
+app.use(Cors(corsOptions));
 
 (function () {
     // you absolutely must provide an 'httpUnsafeOrigin' (a truthy string)

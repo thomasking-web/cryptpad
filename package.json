@@ -27,6 +27,7 @@
     "codemirror": "^5.19.0",
     "components-font-awesome": "^4.6.3",
     "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "croppie": "^2.5.0",
     "dragula": "3.7.2",
     "drawio": "github:cryptpad/drawio-npm#npm-21.8.2+5",
